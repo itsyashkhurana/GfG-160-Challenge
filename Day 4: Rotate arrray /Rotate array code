@@ -1,0 +1,6 @@
+ int n = arr.size();  
+    d = d % n;  // In case d is greater than n  
+    if (d == 0) return; // No need to rotate  
+
+    // rotate to perform the left rotation  
+    rotate(arr.begin(), arr.begin() + d, arr.end());  
