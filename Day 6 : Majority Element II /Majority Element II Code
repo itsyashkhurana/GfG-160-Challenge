@@ -1,0 +1,22 @@
+unordered_map<int, int> voteCount;  
+    int n = arr.size();  
+    int threshold = n / 3;  
+
+    // Count votes for each candidate  
+    for (int num : arr) {  
+        voteCount[num]++;  
+    }  
+
+    vector<int> result;  
+
+    // Check which candidates have votes greater than one-third of total votes  
+    for (const auto& entry : voteCount) {  
+        if (entry.second > threshold) {  
+            result.push_back(entry.first);  
+        }  
+    }  
+
+    // Sort the result in increasing order  
+    sort(result.begin(), result.end());  
+
+    return result;  
