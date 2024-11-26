@@ -1,3 +1,40 @@
+//1st Approach 
+int maximumProfit(vector<int> &prices) {
+        // code here
+  
+    int n = prices.size();  
+    if (n < 2) return 0; // If there are less than 2 prices, no transactions can be made.  
+
+    int minPrice = prices[0]; // Initialize minPrice with the first price  
+    int maxProfit = 0;        // Initialize maxProfit to 0  
+
+    // Iterate through the prices  
+    for (int i = 1; i < n; ++i) {  
+        // Update minPrice if the current price is lower  
+        minPrice = min(minPrice, prices[i]);  
+        
+        // Calculate profit if sold at current price  
+        int profit = prices[i] - minPrice;  
+
+        // Update maxProfit if the current profit is greater  
+        maxProfit = max(maxProfit, profit);  
+    }  
+
+    return maxProfit;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Initialize min_price to a high value and max_profit to 0  
     int min_price = numeric_limits<int>::max();  
     int max_profit = 0;  
