@@ -1,0 +1,40 @@
+ int maxSubarraySum(vector<int> &arr) {
+        // code here...
+      long long maxi = LONG_MIN; // Stores the maximum sum found  
+    long long sum = 0; // Current sum of the subarray  
+    int start = 0; // Starting index of the current subarray  
+    int ansStart = -1, ansEnd = -1; // Indices for the maximum sum subarray  
+
+    for (int i = 0; i < arr.size(); i++) {  
+        if (sum == 0) start = i; // If sum is 0, reset the start index  
+
+        sum += arr[i]; // Add the current element to the current sum  
+
+        if (sum > maxi) { // Check if current sum is greater than max found so far  
+            maxi = sum;  
+            ansStart = start; // Update the start index for the maximum sum subarray  
+            ansEnd = i; // Update the end index for the maximum sum subarray  
+        }  
+
+        // If current sum becomes negative, reset it  
+        if (sum < 0) {  
+            sum = 0;  
+        }  
+    }  
+
+    // Printing the subarray:  
+    // if (ansStart != -1 && ansEnd != -1) {  
+    //     cout << "The subarray is: [";  
+    //     for (int i = ansStart; i <= ansEnd; i++) {  
+    //         cout << arr[i] << (i == ansEnd ? "" : " "); // Avoid trailing space  
+    //     }  
+    //     cout << "]\n";  
+    // } else {  
+    //     cout << "No valid subarray found.\n"; // For cases with all negative numbers  
+    // }  
+
+     
+    // if (maxi < 0) maxi = 0;  
+
+    return maxi; 
+    }
