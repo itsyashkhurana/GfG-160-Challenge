@@ -1,0 +1,33 @@
+string addBinary(string& s1, string& s2) {
+        // your code here
+        // Reverse the strings to facilitate bit-wise addition from the least significant bit  
+    reverse(s1.begin(), s1.end());  
+     reverse(s2.begin(), s2.end());  
+    
+    string result;  
+    int carry = 0;  
+    int maxLength = max(s1.size(), s2.size());  
+
+    for (int i = 0; i < maxLength; ++i) {  
+        int bit1 = (i < s1.size()) ? s1[i] - '0' : 0; // Get bit from s1 or 0 if out of bounds  
+        int bit2 = (i < s2.size()) ? s2[i] - '0' : 0; // Get bit from s2 or 0 if out of bounds  
+
+        int sum = bit1 + bit2 + carry; // Add bits and carry  
+        carry = sum / 2; // Update carry for the next bit  
+        result += (sum % 2) + '0'; // Append the result bit  
+    }  
+
+    if (carry) {  
+        result += '1'; // Append leftover carry if any  
+    }  
+
+    // Reverse the result to get the correct binary string  
+        reverse(result.begin(), result.end());  
+
+    // Remove leading zeros  
+    while (result.length() > 1 && result.front() == '0') {  
+        result.erase(result.begin());  
+    }  
+
+    return result;  
+    }
