@@ -1,0 +1,48 @@
+// 1st Approach
+
+      int getMinDiff(vector<int> &arr, int k) {
+        // code here   
+
+   sort(arr.begin(),arr.end());
+        int n=arr.size();
+
+//Initial difference 
+        int longest=arr[n-1];
+        int shortest=arr[0];
+        int ans=longest-shortest;
+
+// After Modified difference
+        for(int i=1;i<n;i++){
+            longest=max(arr[n-1]-k,arr[i-1]+k);
+            shortest=min(arr[0]+k,arr[i]-k);
+            if(shortest<0) continue;
+            ans=min(ans,longest-shortest);
+        }
+        return ans;  
+    }
+
+// or 
+
+int n = arr.size();  
+    sort(arr.begin(), arr.end());     // Sort the array  
+    
+    // Initialize the minimum and maximum heights after operations  
+    int newMin = arr[0] + K;                   // Start with increasing the smallest tower  
+    int newMax = arr[n - 1] - K;              // Start with decreasing the tallest tower  
+
+    // Iterate through the sorted array to find the potential new min and max 
+
+    for (int i = 0; i < n; i++) {  
+        // Calculate possible new heights  
+        int increasedHeight = arr[i] + K;  
+        int decreasedHeight = arr[i] - K;  
+
+        // Update newMin and newMax based on the conditions  
+        if (decreasedHeight >= 0) { // Ensure it doesn't go negative  
+            newMin = min(newMin, decreasedHeight);  
+        }  
+        newMax = max(newMax, increasedHeight);  
+    }  
+
+    // The minimum difference after all operations  
+    return newMax - newMin;

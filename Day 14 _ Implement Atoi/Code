@@ -1,0 +1,96 @@
+// Step 1: Skip leading whitespaces
+        while (*s == ' ') {
+            s++;
+        }
+
+        // Step 2: Check for sign
+        int sign = 1;
+        if (*s == '-' || *s == '+') {
+            if (*s == '-') {
+                sign = -1;
+            }
+            s++;
+        }
+
+        // Step 3: Read the integer
+        long long result = 0; // Use long long to handle overflow
+        while (*s >= '0' && *s <= '9') {
+            result = result * 10 + (*s - '0');
+
+            // Step 4: Check for overflow
+            if (result * sign > INT_MAX) {
+                return INT_MAX;
+            }
+            if (result * sign < INT_MIN) {
+                return INT_MIN;
+            }
+            s++;
+        }
+
+        // Step 5: Return the result with sign
+        return static_cast<int>(result * sign);
+
+
+
+// full examples with code 
+
+#include <iostream>
+#include <climits> // For INT_MAX and INT_MIN
+
+class Solution {
+public:
+    int myAtoi(char *s) {
+        // Step 1: Skip leading whitespaces
+        while (*s == ' ') {
+            s++;
+        }
+
+        // Step 2: Check for sign
+        int sign = 1;
+        if (*s == '-' || *s == '+') {
+            if (*s == '-') {
+                sign = -1;
+            }
+            s++;
+        }
+
+        // Step 3: Read the integer
+        long long result = 0; // Use long long to handle overflow
+        while (*s >= '0' && *s <= '9') {
+            result = result * 10 + (*s - '0');
+
+            // Step 4: Check for overflow
+            if (result * sign > INT_MAX) {
+                return INT_MAX;
+            }
+            if (result * sign < INT_MIN) {
+                return INT_MIN;
+            }
+            s++;
+        }
+
+        // Step 5: Return the result with sign
+        return static_cast<int>(result * sign);
+    }
+};
+
+int main() {
+    Solution solution;
+    
+    char input1[] = "-123";
+    cout << solution.myAtoi(input1) << std::endl; // Output: -123
+
+    char input2[] = "  -";
+    cout << solution.myAtoi(input2) << std::endl; // Output: 0
+
+    char input3[] = " 1231231231311133";
+    cout << solution.myAtoi(input3) << std::endl; // Output: 2147483647
+
+    char input4[] = "-999999999999";
+    cout << solution.myAtoi(input4) << std::endl; // Output: -2147483648
+
+    char input5[] = "  -0012gfg4";
+    cout << solution.myAtoi(input5) << std::endl; // Output: -12
+
+    return 0;
+}

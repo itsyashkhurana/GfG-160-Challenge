@@ -1,0 +1,23 @@
+ int missingNumber(vector<int> &arr) {
+       
+    int n = arr.size();
+
+    // Step 1: Place each number in its right place
+    for (int i = 0; i < n; ++i) {
+        while (arr[i] > 0 && arr[i] <= n && arr[arr[i] - 1] != arr[i]) {
+            // Swap arr[i] with arr[arr[i] - 1]
+            std::swap(arr[i], arr[arr[i] - 1]);
+        }
+    }
+
+    // Step 2: Find the first missing positive
+    for (int i = 0; i < n; ++i) {
+        if (arr[i] != i + 1) {
+            return i + 1; // The first missing positive number
+        }
+    }
+
+    // If all numbers are in place, return n + 1
+    return n + 1;
+}
+
