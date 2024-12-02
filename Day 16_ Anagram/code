@@ -1,4 +1,48 @@
- // Check if the lengths of the strings are different  
+ // Check if lengths are equal  
+    if (s1.size() != s2.size()) {  
+        return false;  
+    }  
+
+    // Frequency array for characters ('a' to 'z')  
+    std::vector<int> frequency(26, 0);  
+    
+    // Count frequency of each character in both strings  
+    for (char ch : s1) {  
+        frequency[ch - 'a']++;  
+    }  
+    
+    for (char ch : s2) {  
+        frequency[ch - 'a']--;  
+    }  
+
+    // Check if all counts are zero  
+    for (int count : frequency) {  
+        if (count != 0) {  
+            return false;  
+        }  
+    }  
+    
+    return true;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Check if the lengths of the strings are different  
     if (s1.size() != s2.size()) {  
         return false;  
     }  
