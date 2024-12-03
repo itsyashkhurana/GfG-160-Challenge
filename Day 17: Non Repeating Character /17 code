@@ -1,0 +1,16 @@
+   unordered_map<char, int> charCount;  
+
+    // Count occurrences of each character  
+    for (char c : s) {  
+        charCount[c]++;  
+    }  
+
+    // Find the first non-repeating character  
+    for (char c : s) {  
+        if (charCount[c] == 1) {  
+            return c;  
+        }  
+    }  
+
+    // If there's no non-repeating character, return '$'  
+    return '$'; 
