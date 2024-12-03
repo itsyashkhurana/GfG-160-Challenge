@@ -1,4 +1,22 @@
-   unordered_map<char, int> charCount;  
+//1st approach
+char nonRepeatingChar(char s[]) {
+    // code here
+   int count[256] = {0}; 
+ 
+    for (int i = 0; s[i] != '\0'; i++) {  
+        count[(unsigned char)s[i]]++;  
+    }  
+    for (int i = 0; s[i] != '\0'; i++) {  
+        if (count[(unsigned char)s[i]] == 1) {  
+            return s[i];  
+        }  
+    }  
+
+    return '$'; 
+}
+
+// 2nd approach
+unordered_map<char, int> charCount;  
 
     // Count occurrences of each character  
     for (char c : s) {  
@@ -14,22 +32,3 @@
 
     // If there's no non-repeating character, return '$'  
     return '$'; 
-
-
-// 2nd code 
-
- int count[256] = {0}; // Array to store the count of each character  
-
-    // Count occurrences of each character  
-    for (int i = 0; s[i] != '\0'; i++) {  
-        count[(unsigned char)s[i]]++;  
-    }  
-
-    // Find the first non-repeating character  
-    for (int i = 0; s[i] != '\0'; i++) {  
-        if (count[(unsigned char)s[i]] == 1) {  
-            return s[i]; // Return the first non-repeating character  
-        }  
-    }  
-
-    return '\0';
