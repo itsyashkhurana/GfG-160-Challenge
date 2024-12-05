@@ -1,4 +1,37 @@
- string rev_s = s;  
+// 
+int minCharsToAddForPalindrome(const std::string& s) {  
+    std::string rev_s = s;  
+    std::reverse(rev_s.begin(), rev_s.end());  
+
+    // Create the combined string with a separator  
+    std::string combined = s + "#" + rev_s;  
+    int n = combined.size();  
+    std::vector<int> prefix(n, 0);  
+    
+    // Compute the prefix function  
+    for (int i = 1; i < n; ++i) {  
+        int j = prefix[i - 1];  
+        
+        // Finding the length of the longest prefix which is also a suffix  
+        while (j > 0 && combined[i] != combined[j]) {  
+            j = prefix[j - 1];  
+        }  
+        if (combined[i] == combined[j]) {  
+            j++;  
+        }  
+        prefix[i] = j;  
+    }  
+
+    // The length of the longest palindromic suffix  
+    int longest_palindromic_suffix_length = prefix[n - 1];  
+
+    // Minimum characters to add to make it a palindrome  
+    return s.size() - longest_palindromic_suffix_length;  
+} 
+
+
+// 2nd way
+string rev_s = s;  
     reverse(rev_s.begin(), rev_s.end());  
 
     // Create a new string for KMP algorithm  
