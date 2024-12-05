@@ -1,0 +1,26 @@
+ string rev_s = s;  
+    reverse(rev_s.begin(), rev_s.end());  
+
+    // Create a new string for KMP algorithm  
+    string concat = s + '#' + rev_s; // Using '#' as a separator  
+    int n = concat.size();  
+    
+    // Create LPS (Longest Prefix Suffix) array  
+    vector<int> lps(n, 0);  
+    for (int i = 1; i < n; ++i) {  
+        int j = lps[i - 1];  
+
+        while (j > 0 && concat[i] != concat[j]) {  
+            j = lps[j - 1];  
+        }  
+
+        if (concat[i] == concat[j]) {  
+            j++;  
+        }  
+        lps[i] = j;  
+    }  
+
+    // The length of the longest palindromic suffix  
+    int longestPalindromicSuffixLength = lps[n - 1];  
+    // Minimum characters to add at front  
+    return s.size() - longestPalindromicSuffixLength; 
