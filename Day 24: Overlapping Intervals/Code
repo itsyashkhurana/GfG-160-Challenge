@@ -1,0 +1,27 @@
+  vector<vector<int>> mergeOverlap(vector<vector<int>>& arr) {
+        // Code here
+            // If there are no intervals, return an empty array.  
+    if (arr.empty()) return {};  
+
+    // Sort the intervals based on the starting values.  
+    sort(arr.begin(), arr.end());  
+
+    vector<vector<int>> merged;  
+    merged.push_back(arr[0]);  // Start with the first interval.  
+
+    for (int i = 1; i < arr.size(); i++) {  
+        // Get the last interval in merged intervals.  
+        vector<int>& last = merged.back();  
+
+        // Check if there is an overlap.  
+        if (arr[i][0] <= last[1]) {  
+            // If there is an overlap, merge the intervals.  
+            last[1] = max(last[1], arr[i][1]);  
+        } else {  
+            // If there is no overlap, add the current interval.  
+            merged.push_back(arr[i]);  
+        }  
+    }  
+
+    return merged;
+    }
