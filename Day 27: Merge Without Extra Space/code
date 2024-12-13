@@ -1,0 +1,35 @@
+int n = a.size();  
+    int m = b.size();  
+    
+    // Create the merged vector and use it to place elements in a and b accordingly  
+    vector<int> merged(n + m);  
+    
+    int i = 0, j = 0, k = 0;  
+
+    // Merge a[] and b[] into merged[]  
+    while (i < n && j < m) {  
+        if (a[i] <= b[j]) {  
+            merged[k++] = a[i++];  
+        } else {  
+            merged[k++] = b[j++];  
+        }  
+    }  
+
+    // Copy remaining elements of a[]  
+    while (i < n) {  
+        merged[k++] = a[i++];  
+    }  
+
+    // Copy remaining elements of b[]  
+    while (j < m) {  
+        merged[k++] = b[j++];  
+    }  
+
+    // Now split the merged array back into a and b  
+    for (int idx = 0; idx < n; idx++) {  
+        a[idx] = merged[idx];  
+    }  
+    
+    for (int idx = 0; idx < m; idx++) {  
+        b[idx] = merged[n + idx];  
+    }  
