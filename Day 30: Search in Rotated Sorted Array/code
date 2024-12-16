@@ -1,0 +1,27 @@
+ int left = 0;  
+    int right = arr.size() - 1;  
+
+    while (left <= right) {  
+        int mid = left + (right - left) / 2;  
+
+        if (arr[mid] == key) {  
+            return mid; // Key found  
+        }  
+
+        // Determine which side is properly sorted  
+        if (arr[left] <= arr[mid]) { // Left side is sorted  
+            if (arr[left] <= key && key < arr[mid]) {  
+                right = mid - 1; // Search in the left side  
+            } else {  
+                left = mid + 1; // Search in the right side  
+            }  
+        } else { // Right side is sorted  
+            if (arr[mid] < key && key <= arr[right]) {  
+                left = mid + 1; // Search in the right side  
+            } else {  
+                right = mid - 1; // Search in the left side  
+            }  
+        }  
+    }  
+    
+    return -1;
