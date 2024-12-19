@@ -1,0 +1,36 @@
+
+bool canPlaceCows(const vector<int>& stalls, int k, int minDist) {  
+    int count = 1; // Place the first cow in the first stall  
+    int lastPosition = stalls[0]; // Last position where we placed a cow  
+
+    for (int i = 1; i < stalls.size(); ++i) {  
+        // Check if the current stall position is at least minDist away from the last cow's position  
+        if (stalls[i] - lastPosition >= minDist) {  
+            count++;  
+            lastPosition = stalls[i]; // Update the last position to current stall  
+            if (count == k) {  
+                return true; // All cows are placed  
+            }  
+        }  
+    }  
+    return false; // Not all cows could be placed  
+}  
+    int aggressiveCows(vector<int> &stalls, int k) {
+
+        // Write your code here
+         sort(stalls.begin(), stalls.end()); // Sort stalls positions  
+    int low = 1; // Minimum possible distance  
+    int high = stalls.back() - stalls.front(); // Maximum possible distance  
+    int result = 0;  
+
+    while (low <= high) {  
+        int mid = low + (high - low) / 2; // Calculate mid distance  
+        if (canPlaceCows(stalls, k, mid)) {  
+            result = mid; // Update result as this mid is a valid distance  
+            low = mid + 1; // Try for a bigger distance  
+        } else {  
+            high = mid - 1; // Try for a smaller distance  
+        }  
+    }  
+    return result;  
+    }
