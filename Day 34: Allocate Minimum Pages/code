@@ -1,0 +1,42 @@
+bool isAllocationPossible(const vector<int>& arr, int k, int mid) {  
+    int studentCount = 1;  
+    int currentSum = 0;  
+
+    for (int pages : arr) {  
+        if (currentSum + pages > mid) {  
+            studentCount++;  
+            currentSum = pages;  
+            if (studentCount > k || pages > mid) // More students needed or single book exceeds mid  
+                return false;  
+        } else {  
+            currentSum += pages;  
+        }  
+    }  
+    return true;  
+}  
+    int findPages(vector<int> &arr, int k) {
+        // code here
+        
+        
+         int totalPages = accumulate(arr.begin(), arr.end(), 0);  
+    int maxPages = *max_element(arr.begin(), arr.end());  
+
+    if (k > arr.size()) {  
+        return -1; // More students than books  
+    }  
+
+    int low = maxPages; // At least one student gets the max single book  
+    int high = totalPages; // At most one student gets all books  
+
+    while (low < high) {  
+        int mid = low + (high - low) / 2;  
+
+        // Check if allocation is possible with mid as maximum pages  
+        if (isAllocationPossible(arr, k, mid)) {  
+            high = mid; // Try for a better (smaller) max page count  
+        } else {  
+            low = mid + 1; // Increase mid  
+        }  
+    }  
+    return low; // or high, they will be the same at this point  
+    }
