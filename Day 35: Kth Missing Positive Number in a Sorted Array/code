@@ -1,0 +1,21 @@
+ int missingCount = 0; // Count of missing numbers  
+    int currentMissing = 0; // Currently missing number  
+    int n = arr.size();  
+    int i = 0, currentNum = 1; // Start checking from 1  
+
+    while (missingCount < k) {  
+        if (i < n && arr[i] == currentNum) {  
+            // If currentNum is present in arr, move to next number  
+            i++;  
+        } else {  
+            // If currentNum is missing  
+            missingCount++;  
+            if (missingCount == k) {  
+                currentMissing = currentNum; // Store the kth missing  
+            }  
+        }  
+        currentNum++; // Check the next number  
+    }  
+
+    return currentMissing; // Return the kth missing number  
+}  
