@@ -1,0 +1,24 @@
+ unordered_map<int, int> freqMap;  
+    int count = 0;  
+
+    // Count occurrences of each number in the array  
+    for (int num : arr) {  
+        freqMap[num]++;  
+    }  
+
+    // Find pairs  
+    for (int num : arr) {  
+        int complement = target - num;  
+        if (freqMap[complement] > 0) {  
+            count += freqMap[complement];  
+
+            // If the complement and the number are the same, we need to decrement the count  
+            // because we are counting the pair (num, complement) as well as (complement, num)  
+            if (complement == num) {  
+                count--;  
+            }  
+        }  
+    }  
+
+    // Each pair is counted twice, so divide by 2  
+    return count / 2;  
