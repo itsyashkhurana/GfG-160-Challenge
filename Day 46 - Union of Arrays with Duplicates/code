@@ -1,0 +1,16 @@
+int countUnion(const std::vector<int>& a, const std::vector<int>& b) {  
+     unordered_set<int> unionSet;  
+
+    // Insert all elements of array a into the set  
+    for (int num : a) {  
+        unionSet.insert(num);  
+    }  
+
+    // Insert all elements of array b into the set  
+    for (int num : b) {  
+        unionSet.insert(num);  
+    }  
+
+    // The size of the set is the count of distinct elements  
+    return unionSet.size();  
+}  
