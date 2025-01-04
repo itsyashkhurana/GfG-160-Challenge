@@ -1,0 +1,20 @@
+ unordered_map<int, int> sumCount;  
+    int currentSum = 0;  
+    int count = 0;  
+
+    // Initialize the map with the sum 0 having one occurrence  
+    sumCount[0] = 1;  
+
+    for (int num : arr) {  
+        currentSum += num;  
+
+        // Check if there's a previous sum that would lead to the sum equal to k  
+        if (sumCount.find(currentSum - k) != sumCount.end()) {  
+            count += sumCount[currentSum - k];  
+        }  
+
+        // Increment the count of the current running sum in the hashmap  
+        sumCount[currentSum]++;  
+    }  
+
+    return count;  
