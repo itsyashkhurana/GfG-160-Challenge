@@ -1,0 +1,22 @@
+  unordered_map<int, int> prefixXORCount;  
+    int currentXOR = 0;  
+    int count = 0;  
+
+    for (const int& num : arr) {  
+        currentXOR ^= num;  
+
+        // If current XOR is equal to k, we found a subarray  
+        if (currentXOR == k) {  
+            count++;  
+        }  
+
+        // If (currentXOR ^ k) has been seen before, it means we have found a valid subarray  
+        if (prefixXORCount.find(currentXOR ^ k) != prefixXORCount.end()) {  
+            count += prefixXORCount[currentXOR ^ k];  
+        }  
+
+        // Increment the count of the current prefix XOR in the map  
+        prefixXORCount[currentXOR]++;  
+    }  
+
+    return count;  
