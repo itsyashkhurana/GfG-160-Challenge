@@ -1,0 +1,24 @@
+   int count = 0;  
+    int n = arr.size();  
+
+    // Sort the array  
+    std::vector<int> sortedArr = arr;  
+    std::sort(sortedArr.begin(), sortedArr.end());  
+
+    // Use two pointers to find pairs  
+    int left = 0;  
+    int right = n - 1;  
+
+    while (left < right) {  
+        if (sortedArr[left] + sortedArr[right] < target) {  
+            // If arr[left] + arr[right] is less than target,  
+            // then all elements from left to right - 1 can form a valid pair with left  
+            count += (right - left);  
+            left++;  
+        } else {  
+            // Move the right pointer to decrease the sum  
+            right--;  
+        }  
+    }  
+
+    return count; 
