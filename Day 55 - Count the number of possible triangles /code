@@ -1,20 +1,17 @@
-int n = arr.size();  
-    sort(arr.begin(), arr.end()); // Sort the array  
-    
-    int count = 0;  
-    
-    // Iterate through each combination of three different sides  
-    for (int i = 0; i < n - 2; i++) {  
-        int k = i + 2; // Initialize the third pointer  
-        for (int j = i + 1; j < n; j++) {  
-            // Move the third pointer while the sides form a valid triangle  
-            while (k < n && arr[i] + arr[j] > arr[k]) {  
-                k++;  
-            }  
-            // The number of valid triangles formed by sides arr[i], arr[j], and  
-            // any side arr[m] where j < m < k is (k - j - 1)  
-            count += (k - j - 1);  
-        }  
-    }  
-    
-    return count;  
+ int countTriangles(vector<int>& arr) {
+        // code here
+        sort(arr.begin(),arr.end());
+        int n=arr.size(),ans=0;
+        for(int i=n-1;i>=2;i--){
+            int j=0,k=i-1;
+            while(j<k){
+                int twoSideSum = arr[j]+arr[k];
+                if(twoSideSum>arr[i]){
+                    ans+=k-j;
+                    k--;
+                }
+                else j++;
+            }
+        }
+        return ans;
+    }
