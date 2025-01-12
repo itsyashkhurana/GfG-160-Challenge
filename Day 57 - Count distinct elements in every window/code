@@ -1,0 +1,24 @@
+vector<int> result;  
+unordered_map<int, int> freq_map;  
+
+    for (int i = 0; i < arr.size(); i++) {  
+        // Add the current element to the frequency map  
+        freq_map[arr[i]]++;  
+
+        // If we have filled the window of size k  
+        if (i >= k) {  
+            // Remove the element going out of the window  
+            if (freq_map[arr[i - k]] == 1) {  
+                freq_map.erase(arr[i - k]);  
+            } else {  
+                freq_map[arr[i - k]]--;  
+            }  
+        }  
+
+        // If we have a complete window (from index k-1)  
+        if (i >= k - 1) {  
+            result.push_back(freq_map.size());  
+        }  
+    }  
+
+    return result;
