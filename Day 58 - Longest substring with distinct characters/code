@@ -1,0 +1,14 @@
+ unordered_map<char, int> charIndexMap; // To store the last index of each character  
+    int maxLength = 0; // To keep track of the maximum length of substring  
+    int start = 0; // Start index of current substring  
+
+    for (int i = 0; i < s.length(); i++) {  
+        // If the character is found in the map and its index is greater than or equal to the start index  
+        if (charIndexMap.find(s[i]) != charIndexMap.end() && charIndexMap[s[i]] >= start) {  
+            start = charIndexMap[s[i]] + 1; // Move the start to the right of the last occurrence  
+        }  
+        charIndexMap[s[i]] = i; // Update the last index of the character  
+        maxLength = max(maxLength, i - start + 1); // Update maxLength if we found a longer substring  
+    }  
+
+    return maxLength;
