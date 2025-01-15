@@ -1,15 +1,15 @@
-int n=arr.length;
-        int l=0, r=n-1;
-        int leftMax=0, rightMax=0;
-        int ans=0;
-        while(l<r){
-            if(arr[l]<=arr[r]){
-                leftMax = Math.max(leftMax, arr[l]);
-                ans += leftMax-arr[l];
+int n = arr.size();
+        int l = 0, r = n - 1;
+        int lmx = 0, rmx = 0, ans = 0;
+        
+        while(l < r) {
+            if(arr[l] < arr[r]) {
+                lmx = max(lmx, arr[l]);
+                ans += (lmx - arr[l]);
                 l++;
-            }else{
-                rightMax = Math.max(rightMax, arr[r]);
-                ans += rightMax-arr[r];
+            }else {
+                rmx = max(rmx, arr[r]);
+                ans += (rmx - arr[r]);
                 r--;
             }
         }
