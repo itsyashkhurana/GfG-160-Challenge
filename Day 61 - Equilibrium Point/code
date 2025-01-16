@@ -1,0 +1,22 @@
+int totalSum = 0;  
+    int leftSum = 0;  
+
+    // Calculate the total sum of the array  
+    for (int num : arr) {  
+        totalSum += num;  
+    }  
+
+    // Iterate through the array to find the equilibrium point  
+    for (int i = 0; i < arr.size(); ++i) {  
+        // Update totalSum to be the right sum for the current index  
+        totalSum -= arr[i];  
+
+        if (leftSum == totalSum) {  
+            return i;  // Equilibrium point found  
+        }  
+
+        // Update the left sum for the next iteration  
+        leftSum += arr[i];  
+    }  
+
+    return -1;  // No equilibrium point found  
