@@ -1,0 +1,24 @@
+ unordered_map<int, int> sumMap;  
+    int maxLength = 0;  
+    int currentSum = 0;  
+
+    for (int i = 0; i < arr.size(); ++i) {  
+        currentSum += arr[i];  
+
+        // Check if currentSum is equal to the target sum k  
+        if (currentSum == k) {  
+            maxLength = i + 1; // +1 because length is index + 1  
+        }  
+
+        // Check if there is a subarray (sum - k) that has been encountered  
+        if (sumMap.find(currentSum - k) != sumMap.end()) {  
+            maxLength = max(maxLength, i - sumMap[currentSum - k]);  
+        }  
+
+        // Store the current sum along with its first occurrence index  
+        if (sumMap.find(currentSum) == sumMap.end()) {  
+            sumMap[currentSum] = i;  
+        }  
+    }  
+    
+    return maxLength;  
