@@ -1,0 +1,3 @@
+if(!node) return -1;
+        //recursive case;
+        return max(height(node ->left),height(node ->right)) + 1;
