@@ -1,0 +1,17 @@
+class Solution {
+  public:
+    void inorder(Node* root,vector<int>&ans){
+        //base case
+        if(!root) return;
+        //recursive case;
+        inorder(root->left,ans);
+        ans.push_back(root->data);
+        inorder(root->right,ans);
+    }
+    vector<int> inOrder(Node* root) {
+        //CodeGenius
+        vector<int>ans;
+        inorder(root,ans);
+        return ans;
+    }
+};
