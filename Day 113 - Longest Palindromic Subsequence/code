@@ -18,3 +18,5 @@ class Solution {
         return LCS(s,rev,0,0);
         
     }
+};
+
