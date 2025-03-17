@@ -1,0 +1,12 @@
+   int minCoins(std::vector<int> &coins, int sum) {
+    vector<int> dp(sum + 1, INT_MAX);
+        dp[0] = 0; 
+        for (int coin : coins) {
+            for (int j = coin; j <= sum; ++j) {
+                if (dp[j - coin] != INT_MAX) {
+                    dp[j] = min(dp[j], dp[j - coin] + 1);
+                }
+            }
+        }
+        return (dp[sum] == INT_MAX) ? -1 : dp[sum];
+   }
