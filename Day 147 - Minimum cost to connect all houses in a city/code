@@ -1,0 +1,37 @@
+int minCostToConnectHouses(vector<vector<int>>& houses) {  
+    int n = houses.size();  
+    if (n == 0) return 0;  
+
+    vector<int> minCost(n, INT_MAX); // Minimum cost to connect each house  
+    vector<bool> inMST(n, false); // Track houses included in MST  
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> minHeap; // (cost, house index)  
+    
+    minCost[0] = 0; // Start from the first house  
+    minHeap.push({0, 0}); // Push the first house onto the heap  
+    int totalCost = 0;  
+    
+    while (!minHeap.empty()) {  
+        // Get the house with the smallest cost  
+        int cost = minHeap.top().first;  
+        int houseIndex = minHeap.top().second;  
+        minHeap.pop();  
+        
+        if (inMST[houseIndex]) continue; // Skip if already included  
+
+        inMST[houseIndex] = true; // Include this house in MST  
+        totalCost += cost; // Add cost to the total  
+        
+        // Update costs for neighboring houses  
+        for (int i = 0; i < n; i++) {  
+            if (!inMST[i]) { // Only consider houses not yet in the MST  
+                int newCost = abs(houses[houseIndex][0] - houses[i][0]) + abs(houses[houseIndex][1] - houses[i][1]);  
+                if (newCost < minCost[i]) {  
+                    minCost[i] = newCost; // Update the minimum cost  
+                    minHeap.push({newCost, i}); // Push the new cost onto the heap  
+                }  
+            }  
+        }  
+    }  
+
+    return totalCost; // Return the total minimum cost to connect all houses  
+}  
